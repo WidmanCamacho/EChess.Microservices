@@ -1,0 +1,6 @@
+@EChess.Microservice.ApiGateway_HostAddress = http://localhost:5107
+
+GET {{EChess.Microservice.ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
