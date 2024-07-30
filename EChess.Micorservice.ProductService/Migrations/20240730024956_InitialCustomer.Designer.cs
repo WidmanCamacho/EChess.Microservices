@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EChess.Micorservice.ProductService.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20240729210355_InitialCustomer")]
+    [Migration("20240730024956_InitialCustomer")]
     partial class InitialCustomer
     {
         /// <inheritdoc />
@@ -68,6 +68,10 @@ namespace EChess.Micorservice.ProductService.Migrations
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("SaltHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Username")
                         .IsRequired()

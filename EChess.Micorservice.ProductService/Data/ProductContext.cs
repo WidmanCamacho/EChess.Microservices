@@ -16,6 +16,11 @@ namespace EChess.Micorservice.ProductService.Data
                 .HasMany(u => u.Products)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId);
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
         }
 
     }

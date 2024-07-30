@@ -14,16 +14,15 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    [Route("api/GetAllProducts")]
-    public async Task<IActionResult> GetAllProducts()
+    [Route("GetAllProducts")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
     {
         var products = await _productService.GetAllProductsAsync();
         return Ok(products);
     }
 
     [HttpGet("{id}")]
-    [Route("api/GetProductsById")]
-    public async Task<IActionResult> GetProductById(int id)
+    public async Task<ActionResult<Product>> GetProductById(int id)
     {
         var product = await _productService.GetProductByIdAsync(id);
         if (product == null)
@@ -34,15 +33,14 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    [Route("api/AddProduct")]
-    public async Task<IActionResult> AddProduct([FromBody] Product product)
+    [Route("CreateProduct")]
+    public async Task<ActionResult> AddProduct(Product product)
     {
         await _productService.AddProductAsync(product);
         return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
     }
 
     [HttpPut("{id}")]
-    [Route("api/UpdateProduct")]
     public async Task<ActionResult> UpdateProduct(int id, Product product)
     {
         if (id != product.Id)
@@ -54,7 +52,6 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Route("api/DeleteProduct")]
     public async Task<ActionResult> DeleteProduct(int id)
     {
         var product = await _productService.GetProductByIdAsync(id);
@@ -65,4 +62,5 @@ public class ProductController : ControllerBase
         await _productService.DeleteProductAsync(id);
         return NoContent();
     }
+
 }
